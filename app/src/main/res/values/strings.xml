@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ResQHer</string>
+
+    <!-- Main Screen -->
+    <string name="main_title">ResQHer</string>
+    <string name="main_subtitle">Your Safety Companion</string>
+    <string name="emergency_sos">Emergency SOS</string>
+    <string name="emergency_contacts">Emergency Contacts</string>
+    <string name="helpline_numbers">Helpline Numbers</string>
+    <string name="safety_tips">Safety Tips</string>
+    <string name="legal_rights">Legal Rights</string>
+
+    <!-- SOS Activity -->
+    <string name="sos_instruction">Press and hold the button to activate SOS</string>
+    <string name="sos_activated">SOS Activated!</string>
+    <string name="sos_cancel">Cancel SOS</string>
+    <string name="call_police">Call Police (100)</string>
+    <string name="sending_alerts">Sending alerts to emergency contacts...</string>
+    <string name="share_whatsapp">Share on WhatsApp</string>
+
+    <!-- Emergency Contacts -->
+    <string name="add_contact">Add Contact</string>
+    <string name="contact_name">Name</string>
+    <string name="contact_phone">Phone Number</string>
+    <string name="contact_relation">Relationship</string>
+    <string name="primary_contact">Primary Contact</string>
+    <string name="edit_contact">Edit</string>
+    <string name="delete_contact">Delete</string>
+
+    <!-- Helpline -->
+    <string name="call">Call</string>
+    <string name="helpline_title">Emergency Helplines</string>
+
+    <!-- Safety Tips -->
+    <string name="safety_tips_title">Safety Tips</string>
+
+    <!-- Legal Rights -->
+    <string name="legal_rights_title">Know Your Rights</string>
+
+    <!-- Common -->
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="back">Back</string>
+</resources>

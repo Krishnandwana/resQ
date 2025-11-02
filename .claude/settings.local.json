@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir:*)",
+      "Bash(mkdir:*)",
+      "Bash(local.properties)",
+      "Bash(.idea/.gitignore)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
