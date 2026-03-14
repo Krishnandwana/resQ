@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.cardview.widget.CardView;
 
 import com.resqher.safety.activities.EmergencyContactsActivity;
@@ -14,19 +15,24 @@ import com.resqher.safety.activities.LegalRightsActivity;
 import com.resqher.safety.activities.SOSActivity;
 import com.resqher.safety.activities.SafetyTipsActivity;
 import com.resqher.safety.utils.PermissionManager;
+import com.resqher.safety.utils.ShakeToSOSHelper;
 
 public class MainActivity extends AppCompatActivity {
 
     private CardView sosCard, contactsCard, helplineCard, safetyTipsCard, legalRightsCard;
+    private ShakeToSOSHelper shakeToSOSHelper;
+    private SwitchCompat shakeSosToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        shakeToSOSHelper = new ShakeToSOSHelper(this);
         initializeViews();
         checkPermissions();
         setupClickListeners();
+        setupShakeToggle();
     }
 
     private void initializeViews() {
@@ -35,6 +41,27 @@ public class MainActivity extends AppCompatActivity {
         helplineCard = findViewById(R.id.helplineCard);
         safetyTipsCard = findViewById(R.id.safetyTipsCard);
         legalRightsCard = findViewById(R.id.legalRightsCard);
+        shakeSosToggle = findViewById(R.id.shakeSosToggle);
+    }
+
+    private void setupShakeToggle() {
+        if (shakeSosToggle == null) {
+            return;
+        }
+
+        boolean isEnabled = ShakeToSOSHelper.isEnabled(this);
+        shakeSosToggle.setChecked(isEnabled);
+
+        shakeSosToggle.setOnCheckedChangeListener((buttonView, checked) -> {
+            ShakeToSOSHelper.setEnabled(this, checked);
+            if (checked) {
+                shakeToSOSHelper.start();
+                Toast.makeText(this, "Shake-to-SOS enabled", Toast.LENGTH_SHORT).show();
+            } else {
+                shakeToSOSHelper.stop();
+                Toast.makeText(this, "Shake-to-SOS disabled", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void checkPermissions() {
@@ -81,5 +108,21 @@ public class MainActivity extends AppCompatActivity {
                         Toast.LENGTH_LONG).show();
             }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (shakeToSOSHelper != null) {
+            shakeToSOSHelper.start();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        if (shakeToSOSHelper != null) {
+            shakeToSOSHelper.stop();
+        }
+        super.onPause();
     }
 }

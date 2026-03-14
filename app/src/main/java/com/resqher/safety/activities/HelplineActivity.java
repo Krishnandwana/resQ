@@ -13,6 +13,7 @@ import com.resqher.safety.R;
 import com.resqher.safety.adapters.HelplineAdapter;
 import com.resqher.safety.models.Helpline;
 import com.resqher.safety.utils.PermissionManager;
+import com.resqher.safety.utils.ShakeToSOSHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +22,13 @@ public class HelplineActivity extends AppCompatActivity {
 
     private RecyclerView helplineRecyclerView;
     private HelplineAdapter helplineAdapter;
+        private ShakeToSOSHelper shakeToSOSHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_helpline);
+        shakeToSOSHelper = new ShakeToSOSHelper(this);
 
         initializeViews();
         setupRecyclerView();
@@ -93,4 +96,20 @@ public class HelplineActivity extends AppCompatActivity {
         callIntent.setData(Uri.parse("tel:" + helpline.getNumber()));
         startActivity(callIntent);
     }
+
+        @Override
+        protected void onResume() {
+                super.onResume();
+                if (shakeToSOSHelper != null) {
+                        shakeToSOSHelper.start();
+                }
+        }
+
+        @Override
+        protected void onPause() {
+                if (shakeToSOSHelper != null) {
+                        shakeToSOSHelper.stop();
+                }
+                super.onPause();
+        }
 }

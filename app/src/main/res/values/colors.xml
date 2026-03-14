@@ -9,19 +9,19 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- App Colors -->
-    <color name="primary">#E91E63</color>
-    <color name="primary_dark">#C2185B</color>
-    <color name="primary_light">#F8BBD0</color>
-    <color name="accent">#FF4081</color>
+    <color name="primary">#2B9DEE</color>
+    <color name="primary_dark">#1E88E5</color>
+    <color name="primary_light">#CFE8FB</color>
+    <color name="accent">#2B9DEE</color>
 
     <color name="sos_red">#F44336</color>
     <color name="sos_red_dark">#D32F2F</color>
     <color name="safe_green">#4CAF50</color>
     <color name="warning_orange">#FF9800</color>
 
-    <color name="background">#F5F5F5</color>
+    <color name="background">#F6F7F8</color>
     <color name="card_background">#FFFFFF</color>
-    <color name="text_primary">#212121</color>
-    <color name="text_secondary">#757575</color>
-    <color name="divider">#BDBDBD</color>
+    <color name="text_primary">#0F172A</color>
+    <color name="text_secondary">#64748B</color>
+    <color name="divider">#CBD5E1</color>
 </resources>

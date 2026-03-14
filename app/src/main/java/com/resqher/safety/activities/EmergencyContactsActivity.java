@@ -24,6 +24,7 @@ import com.resqher.safety.R;
 import com.resqher.safety.adapters.ContactsAdapter;
 import com.resqher.safety.database.AppDatabase;
 import com.resqher.safety.models.EmergencyContact;
+import com.resqher.safety.utils.ShakeToSOSHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,7 @@ public class EmergencyContactsActivity extends AppCompatActivity {
     private FloatingActionButton fabAddContact;
     private AppDatabase database;
     private ExecutorService executorService;
+    private ShakeToSOSHelper shakeToSOSHelper;
 
     private static final int PICK_CONTACT_REQUEST = 1001;
     private EditText currentNameEdit, currentPhoneEdit;
@@ -48,6 +50,7 @@ public class EmergencyContactsActivity extends AppCompatActivity {
 
         database = AppDatabase.getInstance(this);
         executorService = Executors.newSingleThreadExecutor();
+        shakeToSOSHelper = new ShakeToSOSHelper(this);
 
         initializeViews();
         setupRecyclerView();
@@ -258,5 +261,21 @@ public class EmergencyContactsActivity extends AppCompatActivity {
         if (executorService != null) {
             executorService.shutdown();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (shakeToSOSHelper != null) {
+            shakeToSOSHelper.start();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        if (shakeToSOSHelper != null) {
+            shakeToSOSHelper.stop();
+        }
+        super.onPause();
     }
 }

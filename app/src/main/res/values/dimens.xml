@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="screen_padding_horizontal">16dp</dimen>
+    <dimen name="screen_padding_vertical">16dp</dimen>
+    <dimen name="section_spacing">20dp</dimen>
+    <dimen name="card_spacing">12dp</dimen>
+    <dimen name="card_inner_padding">14dp</dimen>
+
+    <dimen name="title_text_size">28sp</dimen>
+    <dimen name="subtitle_text_size">14sp</dimen>
+    <dimen name="section_title_size">12sp</dimen>
+    <dimen name="quick_action_label_size">12sp</dimen>
+    <dimen name="feature_title_size">14sp</dimen>
+    <dimen name="feature_subtitle_size">11sp</dimen>
+
+    <dimen name="sos_emoji_size">42sp</dimen>
+    <dimen name="sos_text_size">38sp</dimen>
+    <dimen name="sos_subtext_size">12sp</dimen>
+</resources>

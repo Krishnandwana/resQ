@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:paddingStart="12dp"
+    android:paddingTop="8dp"
+    android:paddingEnd="12dp"
+    android:paddingBottom="4dp">
 
     <Button
         android:id="@+id/btnPickContact"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="📱 Select from Contacts"
-        android:backgroundTint="@color/accent"
+        android:layout_height="48dp"
+        android:text="Select from Contacts"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/primary"
         android:textColor="@color/white"
         android:layout_marginBottom="16dp"/>
 
@@ -19,7 +24,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/contact_name"
-        android:layout_marginBottom="8dp">
+        android:layout_marginBottom="10dp"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:hintTextColor="@color/text_secondary">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editName"
@@ -32,7 +43,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/contact_phone"
-        android:layout_marginBottom="8dp">
+        android:layout_marginBottom="10dp"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:hintTextColor="@color/text_secondary">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editPhone"
@@ -45,7 +62,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/contact_relation"
-        android:layout_marginBottom="8dp">
+        android:layout_marginBottom="10dp"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:hintTextColor="@color/text_secondary">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editRelation"
@@ -58,6 +81,7 @@
         android:id="@+id/checkPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/primary_contact"/>
+        android:text="@string/primary_contact"
+        android:textColor="@color/text_primary"/>
 
 </LinearLayout>

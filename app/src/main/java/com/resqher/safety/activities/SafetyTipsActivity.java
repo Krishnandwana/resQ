@@ -1,79 +1,140 @@
 package com.resqher.safety.activities;
 
 import android.os.Bundle;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.resqher.safety.R;
+import com.resqher.safety.adapters.SafetyTipsAdapter;
+import com.resqher.safety.models.SafetyTipSection;
+import com.resqher.safety.utils.ShakeToSOSHelper;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class SafetyTipsActivity extends AppCompatActivity {
 
-    private TextView tipsContent;
+    private RecyclerView tipsRecyclerView;
+    private ShakeToSOSHelper shakeToSOSHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_safety_tips);
 
-        tipsContent = findViewById(R.id.tipsContent);
-        loadSafetyTips();
+        shakeToSOSHelper = new ShakeToSOSHelper(this);
+        tipsRecyclerView = findViewById(R.id.tipsRecyclerView);
+
+        setupTipsList();
     }
 
-    private void loadSafetyTips() {
-        StringBuilder tips = new StringBuilder();
+        private void setupTipsList() {
+        tipsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        tipsRecyclerView.setAdapter(new SafetyTipsAdapter(getSafetyTips()));
+        }
 
-        tips.append("GENERAL SAFETY TIPS\n\n");
+        private List<SafetyTipSection> getSafetyTips() {
+        List<SafetyTipSection> sections = new ArrayList<>();
 
-        tips.append("1. STAY ALERT\n");
-        tips.append("• Always be aware of your surroundings\n");
-        tips.append("• Avoid using headphones while walking alone\n");
-        tips.append("• Trust your instincts - if something feels wrong, leave\n\n");
+        sections.add(new SafetyTipSection(
+            "Awareness First",
+            "Daily Situational Awareness",
+            Arrays.asList(
+                "Keep your phone accessible, not buried in a bag.",
+                "Avoid distractions in unfamiliar places, especially at night.",
+                "Trust early warning signs and move to a safer, busier area."
+            )
+        ));
 
-        tips.append("2. TRAVEL SAFETY\n");
-        tips.append("• Share your travel details with trusted contacts\n");
-        tips.append("• Use verified transportation services\n");
-        tips.append("• Sit near the driver in public transport\n");
-        tips.append("• Keep emergency numbers on speed dial\n\n");
+        sections.add(new SafetyTipSection(
+            "Travel & Commute",
+            "When Using Public or Private Transport",
+            Arrays.asList(
+                "Share trip details/live location with a trusted contact.",
+                "Before boarding a cab, verify vehicle number and driver profile.",
+                "Prefer well-lit pickup/drop points and sit where you can exit quickly."
+            )
+        ));
 
-        tips.append("3. DIGITAL SAFETY\n");
-        tips.append("• Don't share personal information on social media\n");
-        tips.append("• Turn off location tracking when not needed\n");
-        tips.append("• Be cautious of strangers online\n");
-        tips.append("• Use strong passwords and two-factor authentication\n\n");
+        sections.add(new SafetyTipSection(
+            "Night Safety",
+            "Going Out After Dark",
+            Arrays.asList(
+                "Stick to main roads and avoid isolated shortcuts.",
+                "Keep at least 20% battery before leaving a place.",
+                "If followed, enter a public shop/hotel and call someone immediately."
+            )
+        ));
 
-        tips.append("4. SELF-DEFENSE BASICS\n");
-        tips.append("• Carry a personal safety alarm or whistle\n");
-        tips.append("• Learn basic self-defense techniques\n");
-        tips.append("• Target vulnerable areas: eyes, nose, throat, groin\n");
-        tips.append("• Make noise to attract attention\n\n");
+        sections.add(new SafetyTipSection(
+            "Digital Safety",
+            "Online & Social Media",
+            Arrays.asList(
+                "Turn on 2-factor authentication for key accounts.",
+                "Do not share real-time location publicly on social platforms.",
+                "Block/report harassment and preserve screenshots as evidence."
+            )
+        ));
 
-        tips.append("5. NIGHT SAFETY\n");
-        tips.append("• Walk in well-lit areas\n");
-        tips.append("• Keep your phone charged and accessible\n");
-        tips.append("• Inform someone of your whereabouts\n");
-        tips.append("• Avoid shortcuts through isolated areas\n\n");
+        sections.add(new SafetyTipSection(
+            "Home & Building Entry",
+            "At Your Doorstep",
+            Arrays.asList(
+                "Verify identity before opening the door to unknown visitors.",
+                "Inform a trusted person when arriving home late.",
+                "Use peephole/camera and keep emergency contacts on speed dial."
+            )
+        ));
 
-        tips.append("6. PUBLIC SPACES\n");
-        tips.append("• Keep valuables hidden\n");
-        tips.append("• Be cautious of overly friendly strangers\n");
-        tips.append("• Know the location of exits\n");
-        tips.append("• Stay in groups when possible\n\n");
+        sections.add(new SafetyTipSection(
+            "Workplace Safety",
+            "Professional Environments",
+            Arrays.asList(
+                "Document inappropriate behavior with date, time, and details.",
+                "Escalate concerns through internal committee/HR channels.",
+                "Do not attend late one-on-one meetings in isolated locations."
+            )
+        ));
 
-        tips.append("7. HOME SAFETY\n");
-        tips.append("• Keep doors and windows locked\n");
-        tips.append("• Verify identity before opening the door\n");
-        tips.append("• Install proper lighting around entry points\n");
-        tips.append("• Have emergency contacts readily available\n\n");
+        sections.add(new SafetyTipSection(
+            "Emergency Preparedness",
+            "Before an Incident Happens",
+            Arrays.asList(
+                "Keep emergency contacts updated in the app.",
+                "Practice SOS activation and know local helpline numbers.",
+                "Enable shake-to-SOS only if it fits your routine and environment."
+            )
+        ));
 
-        tips.append("8. EMERGENCY PREPAREDNESS\n");
-        tips.append("• Keep ResQHer app easily accessible\n");
-        tips.append("• Memorize important emergency numbers\n");
-        tips.append("• Practice using SOS features regularly\n");
-        tips.append("• Keep your emergency contacts updated\n\n");
+        sections.add(new SafetyTipSection(
+            "If You Feel Unsafe Now",
+            "Immediate Actions",
+            Arrays.asList(
+                "Move toward crowds, security desks, or a known safe point.",
+                "Call helplines and trigger SOS with precise location details.",
+                "After reaching safety, inform trusted contacts and document incident details."
+            )
+        ));
 
-        tips.append("REMEMBER: Your safety is paramount. Don't hesitate to seek help!");
+        return sections;
+    }
 
-        tipsContent.setText(tips.toString());
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (shakeToSOSHelper != null) {
+            shakeToSOSHelper.start();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        if (shakeToSOSHelper != null) {
+            shakeToSOSHelper.stop();
+        }
+        super.onPause();
     }
 }

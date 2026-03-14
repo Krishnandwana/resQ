@@ -1,103 +1,130 @@
 package com.resqher.safety.activities;
 
 import android.os.Bundle;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.resqher.safety.R;
+import com.resqher.safety.adapters.LegalRightsAdapter;
+import com.resqher.safety.models.LegalRightsSection;
+import com.resqher.safety.utils.ShakeToSOSHelper;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class LegalRightsActivity extends AppCompatActivity {
 
-    private TextView legalContent;
+    private RecyclerView legalRecyclerView;
+    private ShakeToSOSHelper shakeToSOSHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_legal_rights);
 
-        legalContent = findViewById(R.id.legalContent);
-        loadLegalRights();
+        shakeToSOSHelper = new ShakeToSOSHelper(this);
+        legalRecyclerView = findViewById(R.id.legalRecyclerView);
+
+        setupLegalRightsList();
     }
 
-    private void loadLegalRights() {
-        StringBuilder legal = new StringBuilder();
+        private void setupLegalRightsList() {
+        legalRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        legalRecyclerView.setAdapter(new LegalRightsAdapter(getLegalRightsSections()));
+        }
 
-        legal.append("WOMEN'S LEGAL RIGHTS IN INDIA\n\n");
+        private List<LegalRightsSection> getLegalRightsSections() {
+        List<LegalRightsSection> sections = new ArrayList<>();
 
-        legal.append("KEY LEGISLATION\n\n");
+        sections.add(new LegalRightsSection(
+            "Constitutional Protections",
+            "Foundational Rights",
+            Arrays.asList(
+                "Article 14 guarantees equality before law.",
+                "Article 15 prohibits discrimination on grounds of sex.",
+                "Article 21 protects life and personal liberty with dignity."
+            )
+        ));
 
-        legal.append("1. THE CONSTITUTION OF INDIA\n");
-        legal.append("• Article 14: Right to Equality\n");
-        legal.append("• Article 15: Prohibition of discrimination on grounds of sex\n");
-        legal.append("• Article 21: Right to Life and Personal Liberty\n\n");
+        sections.add(new LegalRightsSection(
+            "Domestic Violence Protection",
+            "Protection of Women from Domestic Violence Act, 2005",
+            Arrays.asList(
+                "Covers physical, emotional, verbal, sexual, and economic abuse.",
+                "You can seek protection orders, residence rights, and monetary relief.",
+                "You can approach Protection Officers, police, or legal aid services."
+            )
+        ));
 
-        legal.append("2. PROTECTION AGAINST VIOLENCE\n\n");
+        sections.add(new LegalRightsSection(
+            "Workplace Harassment",
+            "POSH Act, 2013",
+            Arrays.asList(
+                "Every eligible workplace must have an Internal Complaints Committee.",
+                "You can file a complaint for sexual harassment at workplace.",
+                "Employers are required to provide a safe and non-hostile environment."
+            )
+        ));
 
-        legal.append("DOMESTIC VIOLENCE ACT, 2005\n");
-        legal.append("• Protection from physical, sexual, verbal, emotional, and economic abuse\n");
-        legal.append("• Right to residence and monetary relief\n");
-        legal.append("• Protection orders and custody of children\n\n");
+        sections.add(new LegalRightsSection(
+            "Criminal Law Protections",
+            "Relevant IPC Provisions",
+            Arrays.asList(
+                "Section 354: assault to outrage modesty.",
+                "Sections 375/376: rape and punishment.",
+                "Section 498A: cruelty by husband or relatives.",
+                "Section 509: insulting modesty through words/gestures."
+            )
+        ));
 
-        legal.append("DOWRY PROHIBITION ACT, 1961\n");
-        legal.append("• Demanding or giving dowry is illegal\n");
-        legal.append("• Punishment: 5 years imprisonment and fine up to Rs. 15,000\n\n");
+        sections.add(new LegalRightsSection(
+            "Emergency Filing Rights",
+            "When Immediate Help Is Needed",
+            Arrays.asList(
+                "You can file a Zero FIR at any police station, regardless of jurisdiction.",
+                "Police cannot lawfully refuse to register a cognizable complaint.",
+                "You can request a woman officer and safer recording conditions where possible."
+            )
+        ));
 
-        legal.append("3. SEXUAL HARASSMENT & ASSAULT\n\n");
+        sections.add(new LegalRightsSection(
+            "Legal Aid & Support",
+            "Access to Justice",
+            Arrays.asList(
+                "Women are eligible for free legal aid through legal services authorities.",
+                "Keep key numbers handy: Women Helpline 1091, Emergency 112/100.",
+                "Preserve evidence (messages, screenshots, medical records) for legal action."
+            )
+        ));
 
-        legal.append("SEXUAL HARASSMENT AT WORKPLACE ACT, 2013\n");
-        legal.append("• Every workplace must have Internal Complaints Committee\n");
-        legal.append("• Employers must provide safe working environment\n");
-        legal.append("• Complaint can be filed within 3 months\n\n");
+        sections.add(new LegalRightsSection(
+            "Important Note",
+            "Use This Information Responsibly",
+            Arrays.asList(
+                "These are general awareness tips and not a substitute for legal advice.",
+                "For case-specific guidance, contact a qualified lawyer or legal aid clinic."
+            )
+        ));
 
-        legal.append("SECTIONS UNDER IPC\n");
-        legal.append("• Section 354: Assault with intent to outrage modesty\n");
-        legal.append("• Section 375/376: Rape and punishment\n");
-        legal.append("• Section 509: Word, gesture to insult modesty of woman\n");
-        legal.append("• Section 498A: Cruelty by husband or relatives\n\n");
+        return sections;
+    }
 
-        legal.append("4. WORKPLACE RIGHTS\n");
-        legal.append("• Equal pay for equal work\n");
-        legal.append("• Maternity leave: 26 weeks (before 12 weeks, after 14 weeks)\n");
-        legal.append("• No night shift without consent (6 PM to 6 AM)\n");
-        legal.append("• Creche facilities in establishments with 50+ employees\n\n");
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (shakeToSOSHelper != null) {
+            shakeToSOSHelper.start();
+        }
+    }
 
-        legal.append("5. PROPERTY RIGHTS\n");
-        legal.append("• Equal right to ancestral property\n");
-        legal.append("• Right to inherit property\n");
-        legal.append("• Right to own and dispose of property\n\n");
-
-        legal.append("6. MARRIAGE & DIVORCE RIGHTS\n");
-        legal.append("• Minimum age for marriage: 21 years (proposed)\n");
-        legal.append("• Right to divorce under various personal laws\n");
-        legal.append("• Right to maintenance and alimony\n");
-        legal.append("• Child custody rights\n\n");
-
-        legal.append("7. EMERGENCY MEASURES\n\n");
-
-        legal.append("ZERO FIR\n");
-        legal.append("• Can be filed at any police station regardless of jurisdiction\n");
-        legal.append("• Police must register FIR and transfer to appropriate station\n\n");
-
-        legal.append("RIGHT TO FREE LEGAL AID\n");
-        legal.append("• Every woman has right to free legal services\n");
-        legal.append("• Contact: National Legal Services Authority (NALSA)\n\n");
-
-        legal.append("8. IMPORTANT HELPLINES\n");
-        legal.append("• Women Helpline: 1091\n");
-        legal.append("• National Commission for Women: 7827170170\n");
-        legal.append("• Police: 100\n");
-        legal.append("• Legal Aid: 15100\n\n");
-
-        legal.append("REMEMBER:\n");
-        legal.append("• You have the right to file a complaint\n");
-        legal.append("• Police cannot refuse to file FIR\n");
-        legal.append("• Medical examination is your right\n");
-        legal.append("• Identity of victim must be kept confidential\n");
-        legal.append("• Statement can be recorded at home/choice of place\n\n");
-
-        legal.append("This app provides general information. For specific legal advice, consult a lawyer.");
-
-        legalContent.setText(legal.toString());
+    @Override
+    protected void onPause() {
+        if (shakeToSOSHelper != null) {
+            shakeToSOSHelper.stop();
+        }
+        super.onPause();
     }
 }
