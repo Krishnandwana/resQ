@@ -11,8 +11,11 @@ import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
 
+import com.google.android.gms.location.CurrentLocationRequest;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.Priority;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.CancellationTokenSource;
 
 import java.io.IOException;
 import java.util.List;
@@ -41,23 +44,49 @@ public class LocationHelper {
             return;
         }
 
+        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+        CurrentLocationRequest locationRequest = new CurrentLocationRequest.Builder()
+                .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
+                .setMaxUpdateAgeMillis(10000)
+                .setDurationMillis(15000)
+                .build();
+
+        fusedLocationClient.getCurrentLocation(locationRequest, cancellationTokenSource.getToken())
+                .addOnSuccessListener(location -> {
+                    if (location != null) {
+                        sendLocationToCallback(location, callback);
+                    } else {
+                        getLastKnownLocation(callback);
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Error getting current location", e);
+                    getLastKnownLocation(callback);
+                });
+    }
+
+    private void getLastKnownLocation(LocationCallback callback) {
         fusedLocationClient.getLastLocation()
                 .addOnSuccessListener(location -> {
                     if (location != null) {
-                        double latitude = location.getLatitude();
-                        double longitude = location.getLongitude();
-                        String address = getAddressFromLocation(latitude, longitude);
-                        String locationString = address + "\n" +
-                                "https://maps.google.com/?q=" + latitude + "," + longitude;
-                        callback.onLocationReceived(locationString, latitude, longitude);
+                        sendLocationToCallback(location, callback);
                     } else {
                         callback.onLocationError("Unable to get current location");
                     }
                 })
                 .addOnFailureListener(e -> {
-                    Log.e(TAG, "Error getting location", e);
+                    Log.e(TAG, "Error getting last known location", e);
                     callback.onLocationError("Failed to get location: " + e.getMessage());
                 });
+    }
+
+    private void sendLocationToCallback(Location location, LocationCallback callback) {
+        double latitude = location.getLatitude();
+        double longitude = location.getLongitude();
+        String address = getAddressFromLocation(latitude, longitude);
+        String locationString = address + "\n" +
+                "https://maps.google.com/?q=" + latitude + "," + longitude;
+        callback.onLocationReceived(locationString, latitude, longitude);
     }
 
     private String getAddressFromLocation(double latitude, double longitude) {

@@ -1,6 +1,7 @@
 package com.resqher.safety;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -14,14 +15,19 @@ import com.resqher.safety.activities.HelplineActivity;
 import com.resqher.safety.activities.LegalRightsActivity;
 import com.resqher.safety.activities.SOSActivity;
 import com.resqher.safety.activities.SafetyTipsActivity;
+import com.resqher.safety.utils.LocationHelper;
 import com.resqher.safety.utils.PermissionManager;
 import com.resqher.safety.utils.ShakeToSOSHelper;
 
 public class MainActivity extends AppCompatActivity {
 
     private CardView sosCard, contactsCard, helplineCard, safetyTipsCard, legalRightsCard;
+    private CardView quickCallPoliceCard, quickShareLocationCard, quickAlertContactsCard;
     private ShakeToSOSHelper shakeToSOSHelper;
     private SwitchCompat shakeSosToggle;
+    private LocationHelper locationHelper;
+
+    private static final String POLICE_NUMBER = "100";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         shakeToSOSHelper = new ShakeToSOSHelper(this);
+        locationHelper = new LocationHelper(this);
         initializeViews();
         checkPermissions();
         setupClickListeners();
@@ -41,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
         helplineCard = findViewById(R.id.helplineCard);
         safetyTipsCard = findViewById(R.id.safetyTipsCard);
         legalRightsCard = findViewById(R.id.legalRightsCard);
+        quickCallPoliceCard = findViewById(R.id.quickCallPoliceCard);
+        quickShareLocationCard = findViewById(R.id.quickShareLocationCard);
+        quickAlertContactsCard = findViewById(R.id.quickAlertContactsCard);
         shakeSosToggle = findViewById(R.id.shakeSosToggle);
     }
 
@@ -95,6 +105,55 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, LegalRightsActivity.class);
             startActivity(intent);
         });
+
+        quickCallPoliceCard.setOnClickListener(v -> callPolice());
+        quickShareLocationCard.setOnClickListener(v -> shareCurrentLocation());
+        quickAlertContactsCard.setOnClickListener(v -> openSOS());
+    }
+
+    private void callPolice() {
+        if (!PermissionManager.hasCallPermission(this)) {
+            Toast.makeText(this, "Call permission required", Toast.LENGTH_SHORT).show();
+            PermissionManager.requestPermissions(this);
+            return;
+        }
+
+        Intent callIntent = new Intent(Intent.ACTION_CALL);
+        callIntent.setData(Uri.parse("tel:" + POLICE_NUMBER));
+        startActivity(callIntent);
+    }
+
+    private void shareCurrentLocation() {
+        if (!PermissionManager.hasLocationPermission(this)) {
+            Toast.makeText(this, "Location permission required", Toast.LENGTH_SHORT).show();
+            PermissionManager.requestPermissions(this);
+            return;
+        }
+
+        Toast.makeText(this, "Fetching location...", Toast.LENGTH_SHORT).show();
+        locationHelper.getCurrentLocation(new LocationHelper.LocationCallback() {
+            @Override
+            public void onLocationReceived(String location, double latitude, double longitude) {
+                String shareMessage = "My current location:\n" + location +
+                        "\n\nShared from ResQHer";
+
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+
+                startActivity(Intent.createChooser(shareIntent, "Share location via"));
+            }
+
+            @Override
+            public void onLocationError(String error) {
+                Toast.makeText(MainActivity.this, "Unable to get location", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void openSOS() {
+        Intent intent = new Intent(MainActivity.this, SOSActivity.class);
+        startActivity(intent);
     }
 
     @Override

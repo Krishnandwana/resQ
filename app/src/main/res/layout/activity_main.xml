@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:fitsSystemWindows="true"
+    android:background="@drawable/bg_home_gradient"
     android:paddingStart="@dimen/screen_padding_horizontal"
     android:paddingTop="@dimen/screen_padding_vertical"
     android:paddingEnd="@dimen/screen_padding_horizontal"
@@ -48,7 +49,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/card_background"
+            app:cardBackgroundColor="@color/status_pill_bg"
             app:cardCornerRadius="16dp"
             app:cardElevation="0dp"
             app:cardUseCompatPadding="false">
@@ -67,7 +68,7 @@
                     android:layout_width="14dp"
                     android:layout_height="14dp"
                     android:contentDescription="location"
-                    android:tint="@color/primary"
+                    android:tint="@color/safe_green"
                     app:srcCompat="@drawable/ic_resq_location" />
 
                 <TextView
@@ -75,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
                     android:text="Active"
-                    android:textColor="@color/text_secondary"
+                    android:textColor="@color/safe_green"
                     android:textSize="12sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -102,23 +103,27 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/card_spacing"
         android:orientation="horizontal"
+        android:paddingStart="2dp"
+        android:paddingEnd="2dp"
         android:weightSum="3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/quickActionsTitle">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/quickCallPoliceCard"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="6dp"
             android:layout_weight="1"
             app:cardBackgroundColor="@color/card_background"
             app:cardCornerRadius="14dp"
-            app:cardElevation="2dp">
+            app:cardElevation="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_quick_action_card"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="@dimen/card_inner_padding">
@@ -127,7 +132,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:contentDescription="Call Police"
-                    android:tint="@color/primary"
+                    android:tint="@color/accent"
                     app:srcCompat="@drawable/ic_resq_warning" />
 
                 <TextView
@@ -145,6 +150,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/quickShareLocationCard"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="3dp"
@@ -152,11 +158,12 @@
             android:layout_weight="1"
             app:cardBackgroundColor="@color/card_background"
             app:cardCornerRadius="14dp"
-            app:cardElevation="2dp">
+            app:cardElevation="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_quick_action_card"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="@dimen/card_inner_padding">
@@ -165,7 +172,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:contentDescription="Share Location"
-                    android:tint="@color/primary"
+                    android:tint="@color/accent"
                     app:srcCompat="@drawable/ic_resq_location" />
 
                 <TextView
@@ -183,17 +190,19 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/quickAlertContactsCard"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
             android:layout_weight="1"
             app:cardBackgroundColor="@color/card_background"
             app:cardCornerRadius="14dp"
-            app:cardElevation="2dp">
+            app:cardElevation="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_quick_action_card"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="@dimen/card_inner_padding">
@@ -202,7 +211,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:contentDescription="Alert Contacts"
-                    android:tint="@color/primary"
+                    android:tint="@color/accent"
                     app:srcCompat="@drawable/ic_resq_group" />
 
                 <TextView
@@ -224,8 +233,8 @@
         android:id="@+id/sosCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/section_spacing"
-        app:cardBackgroundColor="@color/sos_red"
+        android:layout_marginTop="28dp"
+        app:cardBackgroundColor="@color/sos_tile"
         app:cardCornerRadius="32dp"
         app:cardElevation="6dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -270,7 +279,7 @@
         android:id="@+id/resourcesTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/section_spacing"
+        android:layout_marginTop="24dp"
         android:layout_marginBottom="8dp"
         android:text="Resources"
         android:textAllCaps="true"
@@ -286,6 +295,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:paddingStart="2dp"
+        android:paddingEnd="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/resourcesTitle">
@@ -301,15 +312,19 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="6dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 android:layout_weight="1"
                 app:cardBackgroundColor="@color/card_background"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="3dp">
+                app:cardCornerRadius="18dp"
+                app:cardElevation="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
+                    android:gravity="center_horizontal"
+                    android:minHeight="124dp"
                     android:orientation="vertical"
                     android:padding="@dimen/card_inner_padding">
 
@@ -325,6 +340,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:ellipsize="end"
+                        android:gravity="center"
                         android:maxLines="2"
                         android:text="@string/emergency_contacts"
                         android:textColor="@color/text_primary"
@@ -335,6 +351,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
+                        android:gravity="center"
                         android:text="Manage trusted circle"
                         android:textColor="@color/text_secondary"
                         android:textSize="@dimen/feature_subtitle_size" />
@@ -346,15 +363,19 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 android:layout_weight="1"
                 app:cardBackgroundColor="@color/card_background"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="3dp">
+                app:cardCornerRadius="18dp"
+                app:cardElevation="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
+                    android:gravity="center_horizontal"
+                    android:minHeight="124dp"
                     android:orientation="vertical"
                     android:padding="@dimen/card_inner_padding">
 
@@ -370,6 +391,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:ellipsize="end"
+                        android:gravity="center"
                         android:maxLines="2"
                         android:text="@string/helpline_numbers"
                         android:textColor="@color/text_primary"
@@ -380,6 +402,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
+                        android:gravity="center"
                         android:text="24/7 services"
                         android:textColor="@color/text_secondary"
                         android:textSize="@dimen/feature_subtitle_size" />
@@ -399,15 +422,19 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="6dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 android:layout_weight="1"
                 app:cardBackgroundColor="@color/card_background"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="3dp">
+                app:cardCornerRadius="18dp"
+                app:cardElevation="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
+                    android:gravity="center_horizontal"
+                    android:minHeight="124dp"
                     android:orientation="vertical"
                     android:padding="@dimen/card_inner_padding">
 
@@ -423,6 +450,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:ellipsize="end"
+                        android:gravity="center"
                         android:maxLines="2"
                         android:text="@string/safety_tips"
                         android:textColor="@color/text_primary"
@@ -433,6 +461,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
+                        android:gravity="center"
                         android:text="Prepared and aware"
                         android:textColor="@color/text_secondary"
                         android:textSize="@dimen/feature_subtitle_size" />
@@ -444,15 +473,19 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 android:layout_weight="1"
                 app:cardBackgroundColor="@color/card_background"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="3dp">
+                app:cardCornerRadius="18dp"
+                app:cardElevation="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
+                    android:gravity="center_horizontal"
+                    android:minHeight="124dp"
                     android:orientation="vertical"
                     android:padding="@dimen/card_inner_padding">
 
@@ -468,6 +501,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:ellipsize="end"
+                        android:gravity="center"
                         android:maxLines="2"
                         android:text="@string/legal_rights"
                         android:textColor="@color/text_primary"
@@ -478,6 +512,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
+                        android:gravity="center"
                         android:text="Know protections"
                         android:textColor="@color/text_secondary"
                         android:textSize="@dimen/feature_subtitle_size" />
@@ -491,7 +526,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/card_spacing"
-        app:cardBackgroundColor="@color/card_background"
+        app:cardBackgroundColor="@color/footer_soft_bg"
         app:cardCornerRadius="20dp"
         app:cardElevation="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -510,7 +545,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:contentDescription="Safety"
-                android:tint="@color/primary"
+                android:tint="@color/accent"
                 app:srcCompat="@drawable/ic_resq_shield" />
 
             <TextView

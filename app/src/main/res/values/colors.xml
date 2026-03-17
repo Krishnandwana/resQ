@@ -8,20 +8,28 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <!-- App Colors -->
-    <color name="primary">#2B9DEE</color>
-    <color name="primary_dark">#1E88E5</color>
-    <color name="primary_light">#CFE8FB</color>
-    <color name="accent">#2B9DEE</color>
-
-    <color name="sos_red">#F44336</color>
-    <color name="sos_red_dark">#D32F2F</color>
-    <color name="safe_green">#4CAF50</color>
-    <color name="warning_orange">#FF9800</color>
-
-    <color name="background">#F6F7F8</color>
+    <!-- App Colors - Refined Soft + Strong Contrast -->
+    <color name="background">#F9F5F8</color>
+    <color name="secondary_background">#F1ECF5</color>
     <color name="card_background">#FFFFFF</color>
-    <color name="text_primary">#0F172A</color>
-    <color name="text_secondary">#64748B</color>
-    <color name="divider">#CBD5E1</color>
+
+    <color name="primary">#4A90E2</color>
+    <color name="primary_dark">#3A7DC7</color>
+    <color name="primary_light">#E598B3</color>
+    <color name="accent">#C084CC</color>
+
+    <color name="sos_red">#FF3B30</color>
+    <color name="sos_red_dark">#D32F2F</color>
+    <color name="sos_tile">#E11D48</color>
+    <color name="safe_green">#27AE60</color>
+    <color name="warning_orange">#F59E0B</color>
+
+    <color name="text_primary">#1F1F1F</color>
+    <color name="text_secondary">#6B7280</color>
+    <color name="text_disabled">#A1A1AA</color>
+    <color name="divider">#E5E7EB</color>
+
+    <color name="quick_action_border">#F0E6F2</color>
+    <color name="status_pill_bg">#E8F8F0</color>
+    <color name="footer_soft_bg">#FFF5F7</color>
 </resources>

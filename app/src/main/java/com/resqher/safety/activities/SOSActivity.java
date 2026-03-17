@@ -157,16 +157,8 @@ public class SOSActivity extends AppCompatActivity {
                 // Show WhatsApp button
                 shareWhatsAppButton.setVisibility(View.VISIBLE);
 
-                // Reset after some time
-                new CountDownTimer(5000, 1000) {
-                    @Override
-                    public void onTick(long millisUntilFinished) {}
-
-                    @Override
-                    public void onFinish() {
-                        resetUI();
-                    }
-                }.start();
+                // Keep SOS state active until user explicitly cancels/resets
+                cancelButton.setVisibility(View.VISIBLE);
             });
         });
     }

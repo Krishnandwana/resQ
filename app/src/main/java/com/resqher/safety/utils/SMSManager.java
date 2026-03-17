@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.resqher.safety.models.EmergencyContact;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SMSManager {
@@ -24,13 +25,24 @@ public class SMSManager {
 
         for (EmergencyContact contact : contacts) {
             try {
-                smsManager.sendTextMessage(
-                        contact.getPhoneNumber(),
-                        null,
-                        emergencyMessage,
-                        null,
-                        null
-                );
+                ArrayList<String> messageParts = smsManager.divideMessage(emergencyMessage);
+                if (messageParts.size() > 1) {
+                    smsManager.sendMultipartTextMessage(
+                            contact.getPhoneNumber(),
+                            null,
+                            messageParts,
+                            null,
+                            null
+                    );
+                } else {
+                    smsManager.sendTextMessage(
+                            contact.getPhoneNumber(),
+                            null,
+                            emergencyMessage,
+                            null,
+                            null
+                    );
+                }
                 Log.d(TAG, "Emergency SMS sent to: " + contact.getName());
             } catch (Exception e) {
                 Log.e(TAG, "Failed to send SMS to " + contact.getName(), e);
