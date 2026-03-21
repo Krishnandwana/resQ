@@ -14,6 +14,9 @@ This folder contains complete project documentation for development, testing, ma
 8. [UI Theme & Design System](08-ui-theme-and-design-system.md)
 9. [Testing & Release Checklist](09-testing-and-release-checklist.md)
 10. [Viva Questions and Smart Answers](10-viva-questions-and-smart-answers.md)
+11. [File Usage Map](11-file-usage-map.md)
+12. [Research Paper: ResQHer](12-research-paper-resqher.md)
+13. [Shake Functionality Explained](13-shake-functionality-explained.md)
 
 ## Quick Start for New Developers
 
